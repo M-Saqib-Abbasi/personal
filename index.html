@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umrah Package Inquiry - Abbasi Hajj & Umrah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <!-- Security Protection -->
+    <script src="./script/security.js"></script>
+    <!-- External Contact JS -->
+    <script src="./script/contact.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+            color: #1f2937;
+            font-size: 0.95rem;
+        }
+
+        .input-field {
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            line-height: 1.25;
+        }
+
+        .input-field:focus {
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+            outline: none;
+        }
+
+        /* Style for the country code dropdown options */
+        #countryCode option {
+            padding: 0.5rem;
+        }
+
+        /* Logo Container - Perfect Circle with any image */
+        .logo-container {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #bbf7d0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            flex-shrink: 0;
+        }
+
+        .logo-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Responsive logo sizes */
+        @media (max-width: 640px) {
+            .logo-container {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        @media (min-width: 641px) and (max-width: 768px) {
+            .logo-container {
+                width: 70px;
+                height: 70px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .logo-container {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body class="p-4 sm:p-8">
+
+    <div class="max-w-4xl mx-auto bg-white p-6 sm:p-10 rounded-xl shadow-2xl">
+
+        <header class="mb-8 border-b pb-4">
+            <!-- Logo and Title Section - Fully Responsive -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-4">
+                <!-- Logo -->
+                <div class="logo-container">
+                    <img id="companyLogo"
+                        src="https://logo.softwaresolutionhouse.com/Images/Abbasi.jpg"
+                        alt="Abbasi Hajj & Umrah Company Logo"
+                        class="logo-image">
+                </div>
+
+                <!-- Title -->
+                <div class="text-center sm:text-center">
+                    <h1 id="companyName" class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mb-1">
+                        Abbasi Hajj & Umrah Company
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Subtitle -->
+            <p class="text-gray-700 text-sm sm:text-base text-center px-4">
+                Kindly provide the following details so we can offer you the most suitable package.
+            </p>
+        </header>
+
+        <form id="umrahForm" onsubmit="handleFormSubmission(event)">
+
+            <div class="space-y-6 mb-8 p-4 sm:p-6 bg-green-50 rounded-lg border-l-4 border-green-500 shadow-inner">
+                <h2 class="text-lg sm:text-xl font-semibold text-green-700">1. Basic Guest Information</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                    <div>
+                        <label for="guestName" class="form-label">1. Guest Name:</label>
+                        <input type="text" id="guestName" name="guestName" class="input-field w-full" required>
+                    </div>
+                    <div>
+                        <label for="careOfName" class="form-label">Care of Person Name (if applicable):</label>
+                        <input type="text" id="careOfName" name="careOfName" class="input-field w-full"
+                            placeholder="Name of person arranging the package">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 pt-4">
+                    <div>
+                        <label for="contactNo" class="form-label">2. Contact No:</label>
+                        <div class="flex flex-col sm:flex-row sm:space-x-3 space-y-3 sm:space-y-0 sm:items-stretch">
+                            <select id="countryCode" name="countryCode" class="input-field w-full sm:shrink-0 sm:w-32"
+                                required>
+                                <option value="">Select Code</option>
+                            </select>
+                            <input type="tel" id="contactNo" name="contactNo" class="input-field w-full"
+                                placeholder="Mobile Number (e.g., 307-3044150)" required>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-base sm:text-lg font-medium text-gray-700 pt-4">3. Total Persons</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                    <div>
+                        <label for="adultCount" class="form-label text-sm">Adults:</label>
+                        <input type="number" id="adultCount" name="adultCount" class="input-field w-full" value="1"
+                            min="0" required>
+                    </div>
+                    <div>
+                        <label for="childCount" class="form-label text-sm">Children (2-12 yrs):</label>
+                        <input type="number" id="childCount" name="childCount" class="input-field w-full" value="0"
+                            min="0" required>
+                    </div>
+                    <div>
+                        <label for="infantCount" class="form-label text-sm">Infants (0-2 yrs):</label>
+                        <input type="number" id="infantCount" name="infantCount" class="input-field w-full" value="0"
+                            min="0" required>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 pt-4">
+                    <div>
+                        <label for="roomType" class="form-label">Room Type:</label>
+                        <select id="roomType" name="roomType" class="input-field w-full" required>
+                            <option value="">Select Room Type</option>
+                            <option value="Double">Double</option>
+                            <option value="Triple">Triple</option>
+                            <option value="Quad">Quad</option>
+                            <option value="Quint">Quint</option>
+                            <option value="Sharing">Sharing</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="packageDays" class="form-label">Package Days:</label>
+                        <input type="number" id="packageDays" name="packageDays" class="input-field w-full" min="2"
+                            required onchange="calculateTotalNights()" oninput="calculateTotalNights()">
+                        <p id="totalNightsDisplay" class="text-sm text-gray-600 mt-1 font-medium" style="display:none;">
+                            Total Nights: <span id="totalNightsValue" class="text-green-600 font-bold">0</span>
+                        </p>
+                    </div>
+                    <div class="sm:col-span-2 md:col-span-1">
+                        <label for="departureDate" class="form-label">Expected Departure Date:</label>
+                        <input type="date" id="departureDate" name="departureDate" class="input-field w-full" required>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 pt-4">
+                    <div>
+                        <label for="airlinePreference" class="form-label">Airline Preference:</label>
+                        <select id="airlinePreference" name="airlinePreference" class="input-field w-full" required>
+                            <option value="">Select preference</option>
+                            <option value="Direct Only">Direct Only</option>
+                            <option value="Via Only">Via Only</option>
+                            <option value="Both Direct and Via">Both Direct and Via (Flexible)</option>
+                            <option value="No Preference">No Preference</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="departureCity" class="form-label">Departure Airport:</label>
+                        <select id="departureCity" name="departureCity" class="input-field w-full" required>
+                            <option value="">Select Departure Airport</option>
+                        </select>
+                    </div>
+
+                    <div class="sm:col-span-2 md:col-span-1">
+                        <label for="arrivalCity" class="form-label">Arrival City:</label>
+                        <select id="arrivalCity" name="arrivalCity" class="input-field w-full" required>
+                            <option value="">Select City / Airport</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6 mb-8 p-4 sm:p-6 bg-blue-50 rounded-lg border-l-4 border-blue-500 shadow-inner">
+                <h2 class="text-lg sm:text-xl font-semibold text-blue-700">Makkah Hotel Preferences </h2>
+                <div id="makkahHotelsContainer" class="space-y-4">
+                    <div class="makkah-hotel-entry p-4 border border-blue-200 rounded-lg bg-white shadow-md"
+                        data-index="1">
+                        <h3 class="font-medium mb-3 text-blue-600">Hotel Option 1</h3>
+                        <div class="grid grid-cols-1 gap-4 mb-4">
+                            <div>
+                                <label class="form-label text-sm">Hotel Name (Optional):</label>
+                                <input type="text" name="makkahHotelName" class="input-field w-full makkah-hotel-name"
+                                    placeholder="e.g., Hilton Convention Hotel">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div>
+                                <label class="form-label text-sm">10. Distance (Meters/KM):</label>
+                                <input type="text" name="makkahHotelDistance" class="input-field w-full makkah-hotel-distance"
+                                    placeholder="e.g., 50m / 500m" required>
+                            </div>
+                            <div>
+                                <label class="form-label text-sm">11. Star Rating:</label>
+                                <select name="makkahHotelStar" class="input-field w-full makkah-hotel-star" required>
+                                    <option value="">Select option</option>
+                                    <option value="Economy">Economy</option>
+                                    <option value="2 Star">2 Star</option>
+                                    <option value="3 Star">3 Star</option>
+                                    <option value="4 Star">4 Star</option>
+                                    <option value="5 Star">5 Star</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="form-label text-sm">12. Nights:</label>
+                                <input type="number" name="makkahHotelNights" class="input-field w-full makkah-hotel-nights" min="1"
+                                    required oninput="calculateMadinaAuto(this)" onchange="calculateMadinaAuto(this)">
+                                <p class="text-xs text-gray-500 mt-1">Auto-calculates Madina nights</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" onclick="addHotelEntry('makkah')"
+                    class="mt-4 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-150 shadow-md">
+                    + Add More Makkah Hotel Options
+                </button>
+            </div>
+
+            <div class="space-y-6 mb-8 p-4 sm:p-6 bg-indigo-50 rounded-lg border-l-4 border-indigo-500 shadow-inner">
+                <h2 class="text-lg sm:text-xl font-semibold text-indigo-700">Madina Hotel Preferences</h2>
+                <div id="madinaHotelsContainer" class="space-y-4">
+                    <div class="madina-hotel-entry p-4 border border-indigo-200 rounded-lg bg-white shadow-md"
+                        data-index="1">
+                        <h3 class="font-medium mb-3 text-indigo-600">Hotel Option 1</h3>
+                        <div class="grid grid-cols-1 gap-4 mb-4">
+                            <div>
+                                <label class="form-label text-sm">Hotel Name (Optional):</label>
+                                <input type="text" name="madinaHotelName" class="input-field w-full madina-hotel-name"
+                                    placeholder="e.g., Anwar Al Madinah Movenpick">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div>
+                                <label class="form-label text-sm">13. Distance (Meters/KM):</label>
+                                <input type="text" name="madinaHotelDistance" class="input-field w-full madina-hotel-distance"
+                                    placeholder="e.g., 50m / 500m" required>
+                            </div>
+                            <div>
+                                <label class="form-label text-sm">14. Star Rating:</label>
+                                <select name="madinaHotelStar" class="input-field w-full madina-hotel-star" required>
+                                    <option value="">Select option</option>
+                                    <option value="Economy">Economy</option>
+                                    <option value="2 Star">2 Star</option>
+                                    <option value="3 Star">3 Star</option>
+                                    <option value="4 Star">4 Star</option>
+                                    <option value="5 Star">5 Star</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="form-label text-sm">15. Nights:</label>
+                                <input type="number" name="madinaHotelNights" class="input-field w-full madina-hotel-nights" min="1"
+                                    required style="background-color: #f0fdf4;">
+                                <p class="text-xs text-green-600 mt-1 font-medium">✨ Auto-calculated (editable)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" onclick="addHotelEntry('madina')"
+                    class="mt-4 px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-150 shadow-md">
+                    + Add More Madina Hotel Options
+                </button>
+            </div>
+
+            <div class="space-y-6 mb-8 p-4 sm:p-6 bg-purple-50 rounded-lg border-l-4 border-purple-500 shadow-inner">
+                <h2 class="text-lg sm:text-xl font-semibold text-purple-700">16. Transportation Query</h2>
+                <div id="transportationContainer" class="space-y-4">
+                    <div class="transport-entry p-4 border border-purple-200 rounded-lg bg-white shadow-md"
+                        data-index="1">
+                        <h3 class="font-medium mb-3 text-purple-600">Transport Requirement 1</h3>
+                        <div class="grid grid-cols-1 gap-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="form-label text-sm">Type:</label>
+                                    <select name="transportType" class="input-field w-full transport-type" required>
+                                        <option value="">Select type</option>
+                                        <option value="Private">Private</option>
+                                        <option value="Sharing">Sharing</option>
+                                        <option value="No Transport Required">No Transport Required</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="form-label text-sm">Route:</label>
+                                    <select name="transportRoute" class="input-field w-full transport-route" 
+                                            onchange="handleTransportRouteChange(this)" required>
+                                        <option value="">Select route</option>
+                                        <optgroup label="Common Saudi Arabia Routes">
+                                            <option value="JED-MAK">JED → MAK (Jeddah to Makkah Only)</option>
+                                            <option value="MAK-MAD">MAK → MAD (Makkah to Madina Only)</option>
+                                            <option value="MAD-JED">MAD → JED (Madina to Jeddah Only)</option>
+                                            <option value="JED-MAK-MAD">JED → MAK → MAD (Jeddah to Makkah to Madina)</option>
+                                            <option value="MAD-MAK-JED">MAD → MAK → JED (Madina to Makkah to Jeddah)</option>
+                                            <option value="JED-MAK-MAD-MAK-JED">JED → MAK → MAD → MAK → JED (Full Round Trip)</option>
+                                            <option value="JED-MAD">JED → MAD (Jeddah to Madina Only)</option>
+                                            <option value="MAK-JED">MAK → JED (Makkah to Jeddah Only)</option>
+                                        </optgroup>
+                                        <optgroup label="Airport Transfers">
+                                            <option value="JED-Airport-MAK">JED Airport → MAK (Airport to Makkah)</option>
+                                            <option value="MAK-JED-Airport">MAK → JED Airport (Makkah to Airport)</option>
+                                            <option value="MED-Airport-MAD">MED Airport → MAD (Airport to Madina)</option>
+                                            <option value="MAD-MED-Airport">MAD → MED Airport (Madina to Airport)</option>
+                                        </optgroup>
+                                        <option value="Other">Other (Specify Below)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="transport-custom-container" style="display: none;">
+                                <label class="form-label text-sm">Custom Route Details:</label>
+                                <input type="text" name="transportCustom" class="input-field w-full transport-custom"
+                                    placeholder="e.g., Taif to Makkah, Special route, etc.">
+                            </div>
+                            <div>
+                                <label class="form-label text-sm">Additional Details (Optional):</label>
+                                <input type="text" name="transportDetails" class="input-field w-full transport-details"
+                                    placeholder="e.g., SUV required, Wheelchair accessible, Luggage requirements, etc.">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" onclick="addTransportEntry()"
+                    class="mt-4 px-4 py-2 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition duration-150 shadow-md">
+                    + Add More Transport Queries
+                </button>
+            </div>
+
+            <button type="submit"
+                class="w-full py-3 sm:py-4 bg-green-600 text-white text-lg sm:text-xl font-bold rounded-lg hover:bg-green-700 transition duration-150 shadow-xl">
+                Submit Umrah Package Inquiry
+            </button>
+            <p id="submissionMessage" class="mt-4 text-center font-medium text-sm sm:text-base" style="display:none;"></p>
+        </form>
+
+        <footer
+            class="mt-10 pt-4 border-t-4 border-green-500 bg-gray-50 p-4 rounded-b-xl text-center text-sm text-gray-600 shadow-inner">
+            <p id="companyNameFooter" class="font-extrabold text-lg text-gray-800">Abbasi Hajj & Umrah Company</p>
+            <p class="mt-1">
+                Website:
+                <a id="websiteLink" href="https://abbasihajjumrah.com" target="_blank"
+                    class="text-green-600 hover:text-green-800 font-medium transition duration-150">abbasihajjumrah.com</a>
+            </p>
+            <p class="mt-1 flex items-center justify-center space-x-2">
+                <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
+                    <path fill-rule="evenodd"
+                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                        clip-rule="evenodd"></path>
+                </svg>
+                <span class="font-medium">Contact (WhatsApp):</span>
+                <span id="whatsappNumber" class="font-mono text-gray-900 font-bold text-lg">0307-3044150</span>
+            </p>
+        </footer>
+
+    </div>
+
+    <script>
+        // ========================================
+        // 🎯 COMPANY CONFIGURATION - CHANGE HERE
+        // ========================================
+        // Customize these values for different clients
+        const COMPANY_CONFIG = {
+            companyName: "Abbasi Hajj & Umrah Company",
+            companyLogo: "https://logo.softwaresolutionhouse.com/Images/Abbasi.jpg",
+            whatsapp: "0307-3044150",
+            website: "https://abbasihajjumrah.com",
+            websiteDisplay: "abbasihajjumrah.com"  // Without https://
+        };
+
+        // Apply configuration on page load
+        function applyCompanyConfig() {
+            // Update Company Name (Header)
+            const companyNameElement = document.getElementById('companyName');
+            if (companyNameElement) {
+                companyNameElement.textContent = COMPANY_CONFIG.companyName;
+            }
+
+            // Update Company Name (Footer)
+            const companyNameFooterElement = document.getElementById('companyNameFooter');
+            if (companyNameFooterElement) {
+                companyNameFooterElement.textContent = COMPANY_CONFIG.companyName;
+            }
+
+            // Update Logo
+            const logoElement = document.getElementById('companyLogo');
+            if (logoElement) {
+                logoElement.src = COMPANY_CONFIG.companyLogo;
+                logoElement.alt = COMPANY_CONFIG.companyName + " Logo";
+            }
+
+            // Update WhatsApp Number (Footer)
+            const whatsappElement = document.getElementById('whatsappNumber');
+            if (whatsappElement) {
+                whatsappElement.textContent = COMPANY_CONFIG.whatsapp;
+            }
+
+            // Update Website Link (Footer)
+            const websiteLinkElement = document.getElementById('websiteLink');
+            if (websiteLinkElement) {
+                websiteLinkElement.href = COMPANY_CONFIG.website;
+                websiteLinkElement.textContent = COMPANY_CONFIG.websiteDisplay;
+            }
+
+            // Update Page Title
+            document.title = "Umrah Package Inquiry - " + COMPANY_CONFIG.companyName;
+
+            console.log('✅ Company configuration applied:', COMPANY_CONFIG.companyName);
+        }
+
+        // Data for Country Mobile Codes
+        const countryData = {
+            "countries": [
+                { "name": "Afghanistan", "code": "AF", "prefix": "+93" },
+                { "name": "Albania", "code": "AL", "prefix": "+355" },
+                { "name": "Algeria", "code": "DZ", "prefix": "+213" },
+                { "name": "American Samoa", "code": "AS", "prefix": "+1-684" },
+                { "name": "Andorra", "code": "AD", "prefix": "+376" },
+                { "name": "Angola", "code": "AO", "prefix": "+244" },
+                { "name": "Anguilla", "code": "AI", "prefix": "+1-264" },
+                { "name": "Antarctica", "code": "AQ", "prefix": "+" },
+                { "name": "Antigua and Barbuda", "code": "AG", "prefix": "+1-268" },
+                { "name": "Argentina", "code": "AR", "prefix": "+54" },
+                { "name": "Armenia", "code": "AM", "prefix": "+374" },
+                { "name": "Aruba", "code": "AW", "prefix": "+297" },
+                { "name": "Australia", "code": "AU", "prefix": "+61" },
+                { "name": "Austria", "code": "AT", "prefix": "+43" },
+                { "name": "Azerbaijan", "code": "AZ", "prefix": "+994" },
+                { "name": "Bahamas", "code": "BS", "prefix": "+1-242" },
+                { "name": "Bahrain", "code": "BH", "prefix": "+973" },
+                { "name": "Bangladesh", "code": "BD", "prefix": "+880" },
+                { "name": "Barbados", "code": "BB", "prefix": "+1-246" },
+                { "name": "Belarus", "code": "BY", "prefix": "+375" },
+                { "name": "Belgium", "code": "BE", "prefix": "+32" },
+                { "name": "Belize", "code": "BZ", "prefix": "+501" },
+                { "name": "Benin", "code": "BJ", "prefix": "+229" },
+                { "name": "Bermuda", "code": "BM", "prefix": "+1-441" },
+                { "name": "Bhutan", "code": "BT", "prefix": "+975" },
+                { "name": "Bolivia", "code": "BO", "prefix": "+591" },
+                { "name": "Bonaire, Saint Eustatius and Saba ", "code": "BQ", "prefix": "+599" },
+                { "name": "Bosnia and Herzegovina", "code": "BA", "prefix": "+387" },
+                { "name": "Botswana", "code": "BW", "prefix": "+267" },
+                { "name": "Bouvet Island", "code": "BV", "prefix": "+" },
+                { "name": "Brazil", "code": "BR", "prefix": "+55" },
+                { "name": "British Indian Ocean Territory", "code": "IO", "prefix": "+246" },
+                { "name": "British Virgin Islands", "code": "VG", "prefix": "+1-284" },
+                { "name": "Brunei", "code": "BN", "prefix": "+673" },
+                { "name": "Bulgaria", "code": "BG", "prefix": "+359" },
+                { "name": "Burkina Faso", "code": "BF", "prefix": "+226" },
+                { "name": "Burundi", "code": "BI", "prefix": "+257" },
+                { "name": "Cambodia", "code": "KH", "prefix": "+855" },
+                { "name": "Cameroon", "code": "CM", "prefix": "+237" },
+                { "name": "Canada", "code": "CA", "prefix": "+1" },
+                { "name": "Cape Verde", "code": "CV", "prefix": "+238" },
+                { "name": "Cayman Islands", "code": "KY", "prefix": "+1-345" },
+                { "name": "Central African Republic", "code": "CF", "prefix": "+236" },
+                { "name": "Chad", "code": "TD", "prefix": "+235" },
+                { "name": "Chile", "code": "CL", "prefix": "+56" },
+                { "name": "China", "code": "CN", "prefix": "+86" },
+                { "name": "Christmas Island", "code": "CX", "prefix": "+61" },
+                { "name": "Cocos Islands", "code": "CC", "prefix": "+61" },
+                { "name": "Colombia", "code": "CO", "prefix": "+57" },
+                { "name": "Comoros", "code": "KM", "prefix": "+269" },
+                { "name": "Republic of the Congo", "code": "CG", "prefix": "+242" },
+                { "name": "Democratic Republic of the Congo", "code": "CD", "prefix": "+243" },
+                { "name": "Cook Islands", "code": "CK", "prefix": "+682" },
+                { "name": "Costa Rica", "code": "CR", "prefix": "+506" },
+                { "name": "Croatia", "code": "HR", "prefix": "+385" },
+                { "name": "Cuba", "code": "CU", "prefix": "+53" },
+                { "name": "Curacao", "code": "CW", "prefix": "+599" },
+                { "name": "Cyprus", "code": "CY", "prefix": "+357" },
+                { "name": "Czech Republic", "code": "CZ", "prefix": "+420" },
+                { "name": "Denmark", "code": "DK", "prefix": "+45" },
+                { "name": "Djibouti", "code": "DJ", "prefix": "+253" },
+                { "name": "Dominica", "code": "DM", "prefix": "+1-767" },
+                { "name": "Dominican Republic", "code": "DO", "prefix": "+1-809 and 1-829" },
+                { "name": "East Timor", "code": "TL", "prefix": "+670" },
+                { "name": "Ecuador", "code": "EC", "prefix": "+593" },
+                { "name": "Egypt", "code": "EG", "prefix": "+20" },
+                { "name": "El Salvador", "code": "SV", "prefix": "+503" },
+                { "name": "Equatorial Guinea", "code": "GQ", "prefix": "+240" },
+                { "name": "Eritrea", "code": "ER", "prefix": "+291" },
+                { "name": "Estonia", "code": "EE", "prefix": "+372" },
+                { "name": "Ethiopia", "code": "ET", "prefix": "+251" },
+                { "name": "Falkland Islands", "code": "FK", "prefix": "+500" },
+                { "name": "Faroe Islands", "code": "FO", "prefix": "+298" },
+                { "name": "Fiji", "code": "FJ", "prefix": "+679" },
+                { "name": "Finland", "code": "FI", "prefix": "+358" },
+                { "name": "France", "code": "FR", "prefix": "+33" },
+                { "name": "French Guiana", "code": "GF", "prefix": "+594" },
+                { "name": "French Polynesia", "code": "PF", "prefix": "+689" },
+                { "name": "French Southern Territories", "code": "TF", "prefix": "+" },
+                { "name": "Gabon", "code": "GA", "prefix": "+241" },
+                { "name": "Gambia", "code": "GM", "prefix": "+220" },
+                { "name": "Georgia", "code": "GE", "prefix": "+995" },
+                { "name": "Germany", "code": "DE", "prefix": "+49" },
+                { "name": "Ghana", "code": "GH", "prefix": "+233" },
+                { "name": "Gibraltar", "code": "GI", "prefix": "+350" },
+                { "name": "Greece", "code": "GR", "prefix": "+30" },
+                { "name": "Greenland", "code": "GL", "prefix": "+299" },
+                { "name": "Grenada", "code": "GD", "prefix": "+1-473" },
+                { "name": "Guadeloupe", "code": "GP", "prefix": "+590" },
+                { "name": "Guam", "code": "GU", "prefix": "+1-671" },
+                { "name": "Guatemala", "code": "GT", "prefix": "+502" },
+                { "name": "Guernsey", "code": "GG", "prefix": "+44-1481" },
+                { "name": "Guinea", "code": "GN", "prefix": "+224" },
+                { "name": "Guinea-Bissau", "code": "GW", "prefix": "+245" },
+                { "name": "Guyana", "code": "GY", "prefix": "+592" },
+                { "name": "Haiti", "code": "HT", "prefix": "+509" },
+                { "name": "Heard Island and McDonald Islands", "code": "HM", "prefix": "+" },
+                { "name": "Honduras", "code": "HN", "prefix": "+504" },
+                { "name": "Hong Kong", "code": "HK", "prefix": "+852" },
+                { "name": "Hungary", "code": "HU", "prefix": "+36" },
+                { "name": "Iceland", "code": "IS", "prefix": "+354" },
+                { "name": "India", "code": "IN", "prefix": "+91" },
+                { "name": "Indonesia", "code": "ID", "prefix": "+62" },
+                { "name": "Iran", "code": "IR", "prefix": "+98" },
+                { "name": "Iraq", "code": "IQ", "prefix": "+964" },
+                { "name": "Ireland", "code": "IE", "prefix": "+353" },
+                { "name": "Isle of Man", "code": "IM", "prefix": "+44-1624" },
+                { "name": "Israel", "code": "IL", "prefix": "+972" },
+                { "name": "Italy", "code": "IT", "prefix": "+39" },
+                { "name": "Ivory Coast", "code": "CI", "prefix": "+225" },
+                { "name": "Jamaica", "code": "JM", "prefix": "+1-876" },
+                { "name": "Japan", "code": "JP", "prefix": "+81" },
+                { "name": "Jersey", "code": "JE", "prefix": "+44-1534" },
+                { "name": "Jordan", "code": "JO", "prefix": "+962" },
+                { "name": "Kazakhstan", "code": "KZ", "prefix": "+7" },
+                { "name": "Kenya", "code": "KE", "prefix": "+254" },
+                { "name": "Kiribati", "code": "KI", "prefix": "+686" },
+                { "name": "Kosovo", "code": "XK", "prefix": "+" },
+                { "name": "Kuwait", "code": "KW", "prefix": "+965" },
+                { "name": "Kyrgyzstan", "code": "KG", "prefix": "+996" },
+                { "name": "Laos", "code": "LA", "prefix": "+856" },
+                { "name": "Latvia", "code": "LV", "prefix": "+371" },
+                { "name": "Lebanon", "code": "LB", "prefix": "+961" },
+                { "name": "Lesotho", "code": "LS", "prefix": "+266" },
+                { "name": "Liberia", "code": "LR", "prefix": "+231" },
+                { "name": "Libya", "code": "LY", "prefix": "+218" },
+                { "name": "Liechtenstein", "code": "LI", "prefix": "+423" },
+                { "name": "Lithuania", "code": "LT", "prefix": "+370" },
+                { "name": "Luxembourg", "code": "LU", "prefix": "+352" },
+                { "name": "Macao", "code": "MO", "prefix": "+853" },
+                { "name": "Macedonia", "code": "MK", "prefix": "+389" },
+                { "name": "Madagascar", "code": "MG", "prefix": "+261" },
+                { "name": "Malawi", "code": "MW", "prefix": "+265" },
+                { "name": "Malaysia", "code": "MY", "prefix": "+60" },
+                { "name": "Maldives", "code": "MV", "prefix": "+960" },
+                { "name": "Mali", "code": "ML", "prefix": "+223" },
+                { "name": "Malta", "code": "MT", "prefix": "+356" },
+                { "name": "Marshall Islands", "code": "MH", "prefix": "+692" },
+                { "name": "Martinique", "code": "MQ", "prefix": "+596" },
+                { "name": "Mauritania", "code": "MR", "prefix": "+222" },
+                { "name": "Mauritius", "code": "MU", "prefix": "+230" },
+                { "name": "Mayotte", "code": "YT", "prefix": "+262" },
+                { "name": "Mexico", "code": "MX", "prefix": "+52" },
+                { "name": "Micronesia", "code": "FM", "prefix": "+691" },
+                { "name": "Moldova", "code": "MD", "prefix": "+373" },
+                { "name": "Monaco", "code": "MC", "prefix": "+377" },
+                { "name": "Mongolia", "code": "MN", "prefix": "+976" },
+                { "name": "Montenegro", "code": "ME", "prefix": "+382" },
+                { "name": "Montserrat", "code": "MS", "prefix": "+1-664" },
+                { "name": "Morocco", "code": "MA", "prefix": "+212" },
+                { "name": "Mozambique", "code": "MZ", "prefix": "+258" },
+                { "name": "Myanmar", "code": "MM", "prefix": "+95" },
+                { "name": "Namibia", "code": "NA", "prefix": "+264" },
+                { "name": "Nauru", "code": "NR", "prefix": "+674" },
+                { "name": "Nepal", "code": "NP", "prefix": "+977" },
+                { "name": "Netherlands", "code": "NL", "prefix": "+31" },
+                { "name": "New Caledonia", "code": "NC", "prefix": "+687" },
+                { "name": "New Zealand", "code": "NZ", "prefix": "+64" },
+                { "name": "Nicaragua", "code": "NI", "prefix": "+505" },
+                { "name": "Niger", "code": "NE", "prefix": "+227" },
+                { "name": "Nigeria", "code": "NG", "prefix": "+234" },
+                { "name": "Niue", "code": "NU", "prefix": "+683" },
+                { "name": "Norfolk Island", "code": "NF", "prefix": "+672" },
+                { "name": "North Korea", "code": "KP", "prefix": "+850" },
+                { "name": "Northern Mariana Islands", "code": "MP", "prefix": "+1-670" },
+                { "name": "Norway", "code": "NO", "prefix": "+47" },
+                { "name": "Oman", "code": "OM", "prefix": "+968" },
+                { "name": "Pakistan", "code": "PK", "prefix": "+92" },
+                { "name": "Palau", "code": "PW", "prefix": "+680" },
+                { "name": "Palestinian Territory", "code": "PS", "prefix": "+970" },
+                { "name": "Panama", "code": "PA", "prefix": "+507" },
+                { "name": "Papua New Guinea", "code": "PG", "prefix": "+675" },
+                { "name": "Paraguay", "code": "PY", "prefix": "+595" },
+                { "name": "Peru", "code": "PE", "prefix": "+51" },
+                { "name": "Philippines", "code": "PH", "prefix": "+63" },
+                { "name": "Pitcairn", "code": "PN", "prefix": "+870" },
+                { "name": "Poland", "code": "PL", "prefix": "+48" },
+                { "name": "Portugal", "code": "PT", "prefix": "+351" },
+                { "name": "Puerto Rico", "code": "PR", "prefix": "+1-787 and 1-939" },
+                { "name": "Qatar", "code": "QA", "prefix": "+974" },
+                { "name": "Reunion", "code": "RE", "prefix": "+262" },
+                { "name": "Romania", "code": "RO", "prefix": "+40" },
+                { "name": "Russia", "code": "RU", "prefix": "+7" },
+                { "name": "Rwanda", "code": "RW", "prefix": "+250" },
+                { "name": "Saint Barthelemy", "code": "BL", "prefix": "+590" },
+                { "name": "Saint Helena", "code": "SH", "prefix": "+290" },
+                { "name": "Saint Kitts and Nevis", "code": "KN", "prefix": "+1-869" },
+                { "name": "Saint Lucia", "code": "LC", "prefix": "+1-758" },
+                { "name": "Saint Martin", "code": "MF", "prefix": "+590" },
+                { "name": "Saint Pierre and Miquelon", "code": "PM", "prefix": "+508" },
+                { "name": "Saint Vincent and the Grenadines", "code": "VC", "prefix": "+1-784" },
+                { "name": "Samoa", "code": "WS", "prefix": "+685" },
+                { "name": "San Marino", "code": "SM", "prefix": "+378" },
+                { "name": "Sao Tome and Principe", "code": "ST", "prefix": "+239" },
+                { "name": "Saudi Arabia", "code": "SA", "prefix": "+966" },
+                { "name": "Senegal", "code": "SN", "prefix": "+221" },
+                { "name": "Serbia", "code": "RS", "prefix": "+381" },
+                { "name": "Seychelles", "code": "SC", "prefix": "+248" },
+                { "name": "Sierra Leone", "code": "SL", "prefix": "+232" },
+                { "name": "Singapore", "code": "SG", "prefix": "+65" },
+                { "name": "Sint Maarten", "code": "SX", "prefix": "+599" },
+                { "name": "Slovakia", "code": "SK", "prefix": "+421" },
+                { "name": "Slovenia", "code": "SI", "prefix": "+386" },
+                { "name": "Solomon Islands", "code": "SB", "prefix": "+677" },
+                { "name": "Somalia", "code": "SO", "prefix": "+252" },
+                { "name": "South Africa", "code": "ZA", "prefix": "+27" },
+                { "name": "South Georgia and the South Sandwich Islands", "code": "GS", "prefix": "+" },
+                { "name": "South Korea", "code": "KR", "prefix": "+82" },
+                { "name": "South Sudan", "code": "SS", "prefix": "+211" },
+                { "name": "Spain", "code": "ES", "prefix": "+34" },
+                { "name": "Sri Lanka", "code": "LK", "prefix": "+94" },
+                { "name": "Sudan", "code": "SD", "prefix": "+249" },
+                { "name": "Suriname", "code": "SR", "prefix": "+597" },
+                { "name": "Svalbard and Jan Mayen", "code": "SJ", "prefix": "+47" },
+                { "name": "Swaziland", "code": "SZ", "prefix": "+268" },
+                { "name": "Sweden", "code": "SE", "prefix": "+46" },
+                { "name": "Switzerland", "code": "CH", "prefix": "+41" },
+                { "name": "Syria", "code": "SY", "prefix": "+963" },
+                { "name": "Taiwan", "code": "TW", "prefix": "+886" },
+                { "name": "Tajikistan", "code": "TJ", "prefix": "+992" },
+                { "name": "Tanzania", "code": "TZ", "prefix": "+255" },
+                { "name": "Thailand", "code": "TH", "prefix": "+66" },
+                { "name": "Togo", "code": "TG", "prefix": "+228" },
+                { "name": "Tokelau", "code": "TK", "prefix": "+690" },
+                { "name": "Tonga", "code": "TO", "prefix": "+676" },
+                { "name": "Trinidad and Tobago", "code": "TT", "prefix": "+1-868" },
+                { "name": "Tunisia", "code": "TN", "prefix": "+216" },
+                { "name": "Turkey", "code": "TR", "prefix": "+90" },
+                { "name": "Turkmenistan", "code": "TM", "prefix": "+993" },
+                { "name": "Turks and Caicos Islands", "code": "TC", "prefix": "+1-649" },
+                { "name": "Tuvalu", "code": "TV", "prefix": "+688" },
+                { "name": "U.S. Virgin Islands", "code": "VI", "prefix": "+1-340" },
+                { "name": "Uganda", "code": "UG", "prefix": "+256" },
+                { "name": "Ukraine", "code": "UA", "prefix": "+380" },
+                { "name": "United Arab Emirates", "code": "AE", "prefix": "+971" },
+                { "name": "United Kingdom", "code": "GB", "prefix": "+44" },
+                { "name": "United States", "code": "US", "prefix": "+1" },
+                { "name": "United States Minor Outlying Islands", "code": "UM", "prefix": "+1" },
+                { "name": "Uruguay", "code": "UY", "prefix": "+598" },
+                { "name": "Uzbekistan", "code": "UZ", "prefix": "+998" },
+                { "name": "Vanuatu", "code": "VU", "prefix": "+678" },
+                { "name": "Vatican", "code": "VA", "prefix": "+379" },
+                { "name": "Venezuela", "code": "VE", "prefix": "+58" },
+                { "name": "Vietnam", "code": "VN", "prefix": "+84" },
+                { "name": "Wallis and Futuna", "code": "WF", "prefix": "+681" },
+                { "name": "Western Sahara", "code": "EH", "prefix": "+212" },
+                { "name": "Yemen", "code": "YE", "prefix": "+967" },
+                { "name": "Zambia", "code": "ZM", "prefix": "+260" },
+                { "name": "Zimbabwe", "code": "ZW", "prefix": "+263" }
+            ]
+        };
+
+        // --- NEW AIRPORT DATA ARRAY ---
+
+        /**
+         * The main array of airport objects.
+         * The user will replace this with the full dataset.
+         */
+        const airportData = [
+
+            // Added crucial Umrah/Hajj-related airports for default functionality
+            { iata: "JED", name: "King Abdulaziz International Airport", city: "Jeddah", country: "SA" },
+            { iata: "MED", name: "Prince Mohammad Bin Abdulaziz Airport", city: "Madinah", country: "SA" },
+            { iata: "RUH", name: "King Khalid International Airport", city: "Riyadh", country: "SA" },
+            { iata: "KHI", name: "Jinnah International Airport", city: "Karachi", country: "PK" },
+            { iata: "LHE", name: "Allama Iqbal International Airport", city: "Lahore", country: "PK" },
+            { iata: "ISB", name: "Islamabad International Airport", city: "Islamabad", country: "PK" },
+            { iata: "SKT", name: "Sialkot Airport", city: "Sialkot", country: "PK" },
+            { iata: "DXB", name: "Dubai International Airport", city: "Dubai", country: "AE" },
+            { iata: "DOH", name: "Hamad International Airport", city: "Doha", country: "QA" },
+            { iata: "AUH", name: "Abu Dhabi Airport", city: "Abu Dhabi", country: "AE" },
+            { iata: "SHJ", name: "Sharjah Airport", city: "Sharjah", country: "AE" },
+            { iata: "IST", name: "Istambul Airport", city: "Istanbul", country: "TR" }
+
+        ];
+
+        // Utility function to convert ISO country code to a flag emoji
+        function getFlagEmoji(countryCode) {
+            // Note: This relies on the system having the required font support for regional indicator symbols.
+            if (!countryCode) return '';
+            const codePoints = countryCode
+                .toUpperCase()
+                .split('')
+                .map(char => 127397 + char.charCodeAt());
+            return String.fromCodePoint(...codePoints);
+        }
+
+        // Function to populate the country code dropdown
+        function populateCountryCodes() {
+            const selectElement = document.getElementById('countryCode');
+            const countries = countryData.countries;
+            const defaultPrefix = "+92"; // Set Pakistan as default
+
+            // Clear any existing options
+            selectElement.innerHTML = '';
+
+            countries
+                // Sort by name for easier lookup
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .forEach(country => {
+                    const option = document.createElement('option');
+                    option.value = country.prefix;
+                    const flag = getFlagEmoji(country.code);
+                    option.textContent = `${country.prefix} (${country.code})`;
+
+                    if (country.prefix === defaultPrefix) {
+                        option.selected = true;
+                    }
+                    selectElement.appendChild(option);
+                });
+
+            // Ensure Pakistan is selected if dynamic population works
+            if (!selectElement.value) {
+                const defaultOption = selectElement.querySelector(`option[value="${defaultPrefix}"]`);
+                if (defaultOption) {
+                    defaultOption.selected = true;
+                }
+            }
+        }
+
+        // --- NEW FUNCTION TO POPULATE AIRPORT DROPDOWNS ---
+
+        function populateAirportDropdowns() {
+            const departureSelect = document.getElementById('departureCity');
+            const arrivalSelect = document.getElementById('arrivalCity');
+
+            // Function to create and append the 'Other' option
+            const createOtherOption = () => {
+                const otherOption = document.createElement('option');
+                otherOption.value = 'Other';
+                otherOption.textContent = 'Other City / Not Listed';
+                return otherOption;
+            };
+
+            // Clear existing options, keeping the initial "Select..." option
+            departureSelect.innerHTML = '<option value="">Select Departure Airport</option>';
+            arrivalSelect.innerHTML = '<option value="">Select City / Airport</option>';
+
+            // Sort airports alphabetically by city name for better UX
+            const sortedAirports = [...airportData].sort((a, b) => {
+                // Prioritize Saudi/Pilgrimage airports at the top
+                const isA_Pilgrim = a.iata === 'JED' || a.iata === 'MED';
+                const isB_Pilgrim = b.iata === 'JED' || b.iata === 'MED';
+                if (isA_Pilgrim && !isB_Pilgrim) return -1;
+                if (!isA_Pilgrim && isB_Pilgrim) return 1;
+
+                // Otherwise, sort by city name
+                return a.city.localeCompare(b.city);
+            });
+
+            sortedAirports.forEach(airport => {
+                const optionText = `${airport.city} (${airport.iata}) - ${airport.country}`;
+                const optionValue = `${airport.city} (${airport.iata})`;
+
+                // Create options for both dropdowns
+                const depOption = document.createElement('option');
+                depOption.value = optionValue;
+                depOption.textContent = optionText;
+                departureSelect.appendChild(depOption);
+
+                const arrOption = document.createElement('option');
+                arrOption.value = optionValue;
+                arrOption.textContent = optionText;
+
+                // Add JED/MED/RUH/DXB/DOH as special options for Arrival City
+                if (['JED', 'MED', 'RUH', 'DXB', 'DOH'].includes(airport.iata)) {
+                    // Can add a class or attribute if needed for styling/grouping later
+                }
+                arrivalSelect.appendChild(arrOption);
+            });
+
+            // Append the 'Other' option to both lists
+            departureSelect.appendChild(createOtherOption());
+            // Rename 'Other' option for arrival for clarity based on original HTML
+            const arrivalOtherOption = createOtherOption();
+            arrivalOtherOption.textContent = 'Other (Specify in transport)';
+            arrivalSelect.appendChild(arrivalOtherOption);
+        }
+
+        // --- Transport Route Handler ---
+        
+        function handleTransportRouteChange(selectElement) {
+            const transportEntry = selectElement.closest('.transport-entry');
+            const customContainer = transportEntry.querySelector('.transport-custom-container');
+            const customInput = transportEntry.querySelector('.transport-custom');
+            
+            if (selectElement.value === 'Other') {
+                customContainer.style.display = 'block';
+                customInput.required = true;
+            } else {
+                customContainer.style.display = 'none';
+                customInput.required = false;
+                customInput.value = '';
+            }
+        }
+
+        // --- Dynamic Field Management Functions ---
+
+        function createDynamicEntry(type, containerId) {
+            const container = document.getElementById(containerId);
+            // Fix: Use correct class selector that matches static entries
+            const entrySelector = type === 'transport' ? `.${type}-entry` : `.${type}-hotel-entry`;
+            const entries = container.querySelectorAll(entrySelector);
+            const count = entries.length + 1;
+
+            const entryDiv = document.createElement('div');
+            // Fix: Use correct class names that match static entries
+            const entryClass = type === 'transport' ? `${type}-entry` : `${type}-hotel-entry`;
+            entryDiv.classList.add(entryClass, 'p-4', 'border', 'rounded-lg', 'bg-white', 'relative', 'shadow-md', 'transition', 'duration-300', 'ease-in-out');
+            entryDiv.setAttribute('data-index', count);
+
+            const titleColor = type === 'makkah' ? 'text-blue-600' : (type === 'madina' ? 'text-indigo-600' : 'text-purple-600');
+
+            if (type === 'makkah' || type === 'madina') {
+                const nightsFieldHTML = type === 'makkah' 
+                    ? `<input type="number" class="input-field w-full ${type}-hotel-nights" min="1" required oninput="calculateMadinaAuto(this)" onchange="calculateMadinaAuto(this)">
+                       <p class="text-xs text-gray-500 mt-1">Auto-calculates Madina nights</p>`
+                    : `<input type="number" class="input-field w-full ${type}-hotel-nights" min="1" required style="background-color: #f0fdf4;">
+                       <p class="text-xs text-green-600 mt-1 font-medium">✨ Auto-calculated (editable)</p>`;
+                
+                entryDiv.innerHTML = `
+            <h3 class="font-medium mb-3 ${titleColor}">Hotel Option ${count}</h3>
+            <div class="grid grid-cols-1 gap-4 mb-4">
+                <div>
+                    <label class="form-label text-sm">Hotel Name:</label>
+                    <input type="text" class="input-field w-full ${type}-hotel-name" placeholder="e.g., ${type === 'makkah' ? 'Hilton Convention Hotel' : 'Anwar Al Madinah Movenpick'}">
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                    <label class="form-label text-sm">Distance (Meters/KM):</label>
+                    <input type="text" class="input-field w-full ${type}-hotel-distance" placeholder="e.g., 200m" required>
+                </div>
+                <div>
+                    <label class="form-label text-sm">Star Rating:</label>
+                    <select class="input-field w-full ${type}-hotel-star" required>
+                        <option value="">Select option</option>
+                        <option value="Economy">Economy</option>
+                        <option value="2 Star">2 Star</option>
+                        <option value="3 Star">3 Star</option>
+                        <option value="4 Star">4 Star</option>
+                        <option value="5 Star">5 Star</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label text-sm">Nights:</label>
+                    ${nightsFieldHTML}
+                </div>
+            </div>
+            ${count > 1 ? `<button type="button" onclick="removeDynamicEntry(this, '${type}')" class="absolute top-2 right-2 text-red-500 hover:text-red-700 transition duration-150" title="Remove this option">❌</button>` : ''}
+        `;
+            } else if (type === 'transport') {
+                entryDiv.innerHTML = `
+            <h3 class="font-medium mb-3 ${titleColor}">Transport Requirement ${count}</h3>
+            <div class="grid grid-cols-1 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="form-label text-sm">Type:</label>
+                        <select class="input-field w-full transport-type" required>
+                            <option value="">Select type</option>
+                            <option value="Private">Private</option>
+                            <option value="Sharing">Sharing</option>
+                            <option value="No Transport Required">No Transport Required</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label text-sm">Route:</label>
+                        <select class="input-field w-full transport-route" onchange="handleTransportRouteChange(this)" required>
+                            <option value="">Select route</option>
+                            <optgroup label="Common Saudi Arabia Routes">
+                                <option value="JED-MAK">JED → MAK (Jeddah to Makkah Only)</option>
+                                <option value="MAK-MAD">MAK → MAD (Makkah to Madina Only)</option>
+                                <option value="MAD-JED">MAD → JED (Madina to Jeddah Only)</option>
+                                <option value="JED-MAK-MAD">JED → MAK → MAD (Jeddah to Makkah to Madina)</option>
+                                <option value="MAD-MAK-JED">MAD → MAK → JED (Madina to Makkah to Jeddah)</option>
+                                <option value="JED-MAK-MAD-MAK-JED">JED → MAK → MAD → MAK → JED (Full Round Trip)</option>
+                                <option value="JED-MAD">JED → MAD (Jeddah to Madina Only)</option>
+                                <option value="MAK-JED">MAK → JED (Makkah to Jeddah Only)</option>
+                            </optgroup>
+                            <optgroup label="Airport Transfers">
+                                <option value="JED-Airport-MAK">JED Airport → MAK (Airport to Makkah)</option>
+                                <option value="MAK-JED-Airport">MAK → JED Airport (Makkah to Airport)</option>
+                                <option value="MED-Airport-MAD">MED Airport → MAD (Airport to Madina)</option>
+                                <option value="MAD-MED-Airport">MAD → MED Airport (Madina to Airport)</option>
+                            </optgroup>
+                            <option value="Other">Other (Specify Below)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="transport-custom-container" style="display: none;">
+                    <label class="form-label text-sm">Custom Route Details:</label>
+                    <input type="text" class="input-field w-full transport-custom" placeholder="e.g., Taif to Makkah, Special route, etc.">
+                </div>
+                <div>
+                    <label class="form-label text-sm">Additional Details (Optional):</label>
+                    <input type="text" class="input-field w-full transport-details" placeholder="e.g., SUV required, Wheelchair accessible, Luggage requirements, etc.">
+                </div>
+            </div>
+            ${count > 1 ? `<button type="button" onclick="removeDynamicEntry(this, '${type}')" class="absolute top-2 right-2 text-red-500 hover:text-red-700 transition duration-150" title="Remove this option">❌</button>` : ''}
+        `;
+            }
+
+            container.appendChild(entryDiv);
+        }
+
+
+        function addHotelEntry(city) {
+            console.log(`🔧 ADD MORE BUTTON CLICKED for ${city}`);
+            const containerId = city === 'makkah' ? 'makkahHotelsContainer' : 'madinaHotelsContainer';
+            const entrySelector = `.${city}-hotel-entry`;
+            console.log(`   Container ID: ${containerId}`);
+            console.log(`   Selector: ${entrySelector}`);
+            const beforeCount = document.querySelectorAll(entrySelector).length;
+            console.log(`   Current ${city} entries before adding:`, beforeCount);
+            
+            createDynamicEntry(city, containerId);
+            
+            const afterCount = document.querySelectorAll(entrySelector).length;
+            console.log(`   Current ${city} entries after adding:`, afterCount);
+            
+            // If adding Madina hotel, auto-calculate nights from corresponding Makkah entry
+            if (city === 'madina') {
+                const newMadinaIndex = afterCount - 1; // 0-based index
+                const makkahEntries = document.querySelectorAll('.makkah-hotel-entry');
+                
+                if (makkahEntries[newMadinaIndex]) {
+                    const makkahNightsInput = makkahEntries[newMadinaIndex].querySelector('.makkah-hotel-nights');
+                    if (makkahNightsInput && makkahNightsInput.value) {
+                        // Trigger auto-calculation for the new Madina entry
+                        setTimeout(() => {
+                            calculateMadinaAuto(makkahNightsInput);
+                            console.log(`   ✨ Auto-calculated nights for new Madina entry ${afterCount}`);
+                        }, 100);
+                    } else {
+                        console.log(`   ℹ️ No corresponding Makkah entry or nights value for Madina entry ${afterCount}`);
+                    }
+                } else {
+                    console.log(`   ℹ️ No corresponding Makkah entry for Madina entry ${afterCount}`);
+                }
+            }
+            
+            console.log(`✅ Entry added successfully\n`);
+        }
+
+        function addTransportEntry() {
+            createDynamicEntry('transport', 'transportationContainer');
+        }
+
+        function removeDynamicEntry(button, type) {
+            const entry = button.closest(`.${type}-entry`);
+            if (entry) {
+                entry.remove();
+                reIndexEntries(type);
+            }
+        }
+
+        function reIndexEntries(type) {
+            const containerId = type.includes('hotel') ? (type.startsWith('makkah') ? 'makkahHotelsContainer' : 'madinaHotelsContainer') : 'transportationContainer';
+            const container = document.getElementById(containerId);
+            // Fix: Use correct class selector
+            const entrySelector = type === 'transport' ? `.${type}-entry` : `.${type}-hotel-entry`;
+            const entries = container.querySelectorAll(entrySelector);
+
+            entries.forEach((entry, index) => {
+                const newIndex = index + 1;
+                entry.setAttribute('data-index', newIndex);
+                const titleElement = entry.querySelector('h3');
+                if (titleElement) {
+                    if (type === 'makkah' || type === 'madina') {
+                        titleElement.textContent = `Hotel Option ${newIndex}`;
+                    } else if (type === 'transport') {
+                        titleElement.textContent = `Transport Requirement ${newIndex}`;
+                    }
+                }
+                const removeBtn = entry.querySelector('button[title="Remove this option"]');
+                if (newIndex === 1 && removeBtn) {
+                    removeBtn.remove();
+                } else if (newIndex > 1 && !removeBtn) {
+                    const removeButtonHtml = `<button type="button" onclick="removeDynamicEntry(this, '${type}')" class="absolute top-2 right-2 text-red-500 hover:text-red-700 transition duration-150 focus:outline-none" title="Remove this option">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </button>`;
+                    entry.insertAdjacentHTML('beforeend', removeButtonHtml);
+                }
+            });
+
+            if (entries.length > 0) {
+                const firstEntryRemoveBtn = entries[0].querySelector('button[title="Remove this option"]');
+                if (firstEntryRemoveBtn) {
+                    firstEntryRemoveBtn.remove();
+                }
+            }
+        }
+
+
+        // --- Form Submission and Data Collection ---
+
+       function collectDynamicData(type) {
+    const data = [];
+    // Fix: Use correct class selector that matches actual entry classes
+    const entrySelector = type === 'transport' ? `.${type}-entry` : `.${type}-hotel-entry`;
+    const entries = document.querySelectorAll(entrySelector);
+    
+    console.log(`\n🔍 COLLECTING ${type.toUpperCase()} DATA:`);
+    console.log(`Found ${entries.length} ${type} entries`);
+
+    entries.forEach((entry, index) => {
+        console.log(`\n  📝 Processing ${type} entry ${index + 1}:`);
+        
+        if (type === 'makkah' || type === 'madina') {
+            // Get the input fields within this specific entry
+            const nameField = entry.querySelector(`.${type}-hotel-name`);
+            const distanceField = entry.querySelector(`.${type}-hotel-distance`);
+            const starField = entry.querySelector(`.${type}-hotel-star`);
+            const nightsField = entry.querySelector(`.${type}-hotel-nights`);
+
+            console.log(`     Fields found:`, {
+                nameField: !!nameField,
+                distanceField: !!distanceField,
+                starField: !!starField,
+                nightsField: !!nightsField
+            });
+
+            // Extract values with fallback to 'N/A'
+            const name = nameField?.value?.trim() || 'N/A';
+            const distance = distanceField?.value?.trim() || '';
+            const star = starField?.value?.trim() || '';
+            const nights = nightsField?.value?.trim() || '';
+
+            console.log(`     Values extracted:`, {
+                name: name,
+                distance: distance || '(empty)',
+                star: star || '(empty)',
+                nights: nights || '(empty)'
+            });
+            
+            // Extra detailed debugging
+            if (!distance || !star || !nights) {
+                console.log(`     🚨 PROBLEM DETECTED:`);
+                if (!distance) console.log(`        ⚠️ Distance field is EMPTY! Value: "${distanceField?.value}"`);
+                if (!star) console.log(`        ⚠️ Star Rating is EMPTY! Value: "${starField?.value}"`);
+                if (!nights) console.log(`        ⚠️ Nights field is EMPTY! Value: "${nightsField?.value}"`);
+                console.log(`     📍 Entry HTML:`, entry.outerHTML.substring(0, 500) + '...');
+            }
+
+            // Only add if the required fields (distance, star, nights) have values
+            // Name is optional so we don't check it
+            if (distance && star && nights) {
+                console.log(`     ✅ ADDED to data array`);
+                data.push({ 
+                    name: name || 'N/A', 
+                    distance: distance, 
+                    star: star, 
+                    nights: nights 
+                });
+            } else {
+                console.log(`     ❌ SKIPPED - Missing required fields:`, {
+                    hasDistance: !!distance,
+                    hasStar: !!star,
+                    hasNights: !!nights
+                });
+            }
+        } else if (type === 'transport') {
+            const typeField = entry.querySelector('.transport-type');
+            const routeField = entry.querySelector('.transport-route');
+            const customField = entry.querySelector('.transport-custom');
+            const detailsField = entry.querySelector('.transport-details');
+
+            console.log(`     Fields found:`, {
+                typeField: !!typeField,
+                routeField: !!routeField,
+                customField: !!customField,
+                detailsField: !!detailsField
+            });
+
+            const typeVal = typeField?.value?.trim() || '';
+            const routeVal = routeField?.value?.trim() || '';
+            const customVal = customField?.value?.trim() || '';
+            const detailsVal = detailsField?.value?.trim() || '';
+
+            console.log(`     Values extracted:`, {
+                type: typeVal || '(empty)',
+                route: routeVal || '(empty)',
+                custom: customVal || '(empty)',
+                details: detailsVal || '(empty)'
+            });
+
+            // Determine the final route value
+            let finalRoute = routeVal;
+            if (routeVal === 'Other' && customVal) {
+                finalRoute = customVal;
+            }
+
+            // Add if type and route are selected
+            if (typeVal && routeVal) {
+                console.log(`     ✅ ADDED to data array`);
+                data.push({ 
+                    type: typeVal,
+                    route: finalRoute === 'Other' ? 'Other (Not specified)' : finalRoute,
+                    details: detailsVal || 'No additional details'
+                });
+            } else {
+                console.log(`     ❌ SKIPPED - Missing required fields:`, {
+                    hasType: !!typeVal,
+                    hasRoute: !!routeVal
+                });
+            }
+        }
+    });
+
+    console.log(`\n✅ ${type.toUpperCase()} COLLECTION COMPLETE: ${data.length} entries added\n`);
+    return data;
+}
+
+
+
+
+
+        function handleFormSubmission(event) {
+            event.preventDefault();
+            const form = event.target;
+            const messageElement = document.getElementById('submissionMessage');
+            const submitButton = form.querySelector('button[type="submit"]');
+
+            // Disable button and show processing message
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+            messageElement.style.display = 'block';
+            messageElement.classList.remove('text-red-600', 'text-green-600');
+            messageElement.classList.add('text-blue-600');
+            messageElement.textContent = 'Processing your inquiry, please wait...';
+
+            // Collect static data
+            const staticData = {
+                guestName: form.guestName.value,
+                careOfName: form.careOfName.value || 'N/A',
+                contactNo: form.countryCode.value + ' ' + form.contactNo.value.replace(/-/g, ''),
+                adultCount: form.adultCount.value,
+                childCount: form.childCount.value,
+                infantCount: form.infantCount.value,
+                roomType: form.roomType.value,
+                packageDays: form.packageDays.value,
+                departureDate: form.departureDate.value,
+                airlinePreference: form.airlinePreference.value,
+                departureCity: form.departureCity.value,
+                arrivalCity: form.arrivalCity.value,
+            };
+
+            // Collect dynamic data
+            console.log('\n🔎 STARTING DATA COLLECTION PROCESS...\n');
+            console.log('Total Makkah entries in DOM:', document.querySelectorAll('.makkah-hotel-entry').length);
+            console.log('Total Madina entries in DOM:', document.querySelectorAll('.madina-hotel-entry').length);
+            console.log('Total Transport entries in DOM:', document.querySelectorAll('.transport-entry').length);
+            console.log(''); // Empty line for readability
+            
+            const makkahHotels = collectDynamicData('makkah');
+            const madinaHotels = collectDynamicData('madina');
+            const transportationQueries = collectDynamicData('transport');
+            
+            console.log('\n📊 COLLECTION RESULTS:');
+            console.log('Makkah hotels collected:', makkahHotels.length, 'out of', document.querySelectorAll('.makkah-hotel-entry').length);
+            console.log('Madina hotels collected:', madinaHotels.length, 'out of', document.querySelectorAll('.madina-hotel-entry').length);
+            console.log('Transport queries collected:', transportationQueries.length, 'out of', document.querySelectorAll('.transport-entry').length);
+
+            const fullData = {
+                ...staticData,
+                makkahHotels: makkahHotels,
+                madinaHotels: madinaHotels,
+                transportationQueries: transportationQueries
+            };
+
+            // Format data for EmailJS
+            const makkahHotelsFormatted = formatHotelsForEmail(makkahHotels);
+            const madinaHotelsFormatted = formatHotelsForEmail(madinaHotels);
+            const transportFormatted = formatTransportForEmail(transportationQueries);
+
+            // Prepare template parameters for EmailJS
+            const templateParams = {
+                guest_name: fullData.guestName,
+                care_of_name: fullData.careOfName,
+                contact_no: fullData.contactNo,
+                adult_count: fullData.adultCount,
+                child_count: fullData.childCount,
+                infant_count: fullData.infantCount,
+                room_type: fullData.roomType,
+                package_days: fullData.packageDays,
+                departure_date: fullData.departureDate,
+                airline_preference: fullData.airlinePreference,
+                departure_city: fullData.departureCity,
+                arrival_city: fullData.arrivalCity,
+                makkah_hotels: makkahHotelsFormatted,
+                madina_hotels: madinaHotelsFormatted,
+                transportation: transportFormatted,
+                submission_date: new Date().toLocaleString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                })
+            };
+
+            // Log data for debugging and verification
+            console.log("═══════════════════════════════════════════════════════════");
+            console.log("    UMRAH PACKAGE INQUIRY - DATA VERIFICATION");
+            console.log("═══════════════════════════════════════════════════════════");
+            console.log("\n📋 FULL DATA OBJECT:");
+            console.log(JSON.stringify(fullData, null, 2));
+            console.log("\n🕋 MAKKAH HOTELS DETAILED:");
+            console.log("Total Makkah Hotels:", fullData.makkahHotels.length);
+            fullData.makkahHotels.forEach((hotel, index) => {
+                console.log(`  Hotel ${index + 1}:`, hotel);
+            });
+            console.log("\n🕌 MADINA HOTELS DETAILED:");
+            console.log("Total Madina Hotels:", fullData.madinaHotels.length);
+            fullData.madinaHotels.forEach((hotel, index) => {
+                console.log(`  Hotel ${index + 1}:`, hotel);
+            });
+            console.log("\n🚗 TRANSPORT QUERIES:");
+            console.log("Total Transport Queries:", fullData.transportationQueries.length);
+            fullData.transportationQueries.forEach((transport, index) => {
+                console.log(`  Query ${index + 1}:`, transport);
+            });
+            console.log("\n📧 EMAIL FORMATTED DATA:");
+            console.log("Makkah Hotels for Email:\n", makkahHotelsFormatted);
+            console.log("\nMadina Hotels for Email:\n", madinaHotelsFormatted);
+            console.log("\nTransportation for Email:\n", transportFormatted);
+            console.log("\n═══════════════════════════════════════════════════════════");
+            
+            // Send email using external contact.js
+            sendUmrahInquiryEmail(fullData)
+                .then(function(response) {
+                    console.log('✅ Email sent successfully!', response);
+                    messageElement.classList.remove('text-blue-600', 'text-red-600');
+                    messageElement.classList.add('text-green-600');
+                    messageElement.textContent = 'Inquiry submitted successfully! A team member will contact you soon, Insha\'Allah.';
+                    form.reset();
+                    
+                    setTimeout(() => {
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Submit Umrah Package Inquiry';
+                        messageElement.style.display = 'none';
+                        window.location.reload();
+                    }, 3000);
+                })
+                .catch(function(error) {
+                    console.error('❌ Email failed:', error);
+                    messageElement.classList.remove('text-blue-600', 'text-green-600');
+                    messageElement.classList.add('text-red-600');
+                    messageElement.textContent = 'Failed to submit inquiry. Please try again or contact us directly via WhatsApp.';
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Submit Umrah Package Inquiry';
+                    
+                    setTimeout(() => {
+                        messageElement.style.display = 'none';
+                    }, 5000);
+                });
+        }
+
+        // Helper function to format hotels for email
+        function formatHotelsForEmail(hotels) {
+            if (hotels.length === 0) {
+                return 'No hotel preferences specified';
+            }
+            return hotels.map((h, i) => 
+                `Option ${i + 1}: ${h.name} | Distance: ${h.distance} | Rating: ${h.star} | Nights: ${h.nights}`
+            ).join('\n');
+        }
+
+        // Helper function to format transport for email
+        function formatTransportForEmail(transport) {
+            if (transport.length === 0) {
+                return 'No transportation queries';
+            }
+            return transport.map((t, i) => 
+                `Query ${i + 1}: Type: ${t.type} | Route: ${t.route} | Details: ${t.details}`
+            ).join('\n');
+        }
+
+        function generateEmailBody(data) {
+            let body = `Assalamu Alaikum wa Rahmatullah wa Barakatuh.\n\n`;
+            body += `A new Umrah Package Inquiry has been submitted. Details are as follows:\n\n`;
+            body += `========================================================\n`;
+            body += `1. Guest Name: ${data.guestName}\n`;
+            body += `Care of Name: ${data.careOfName || 'N/A'}\n`;
+            body += `2. Contact No: ${data.contactNo}\n`;
+            body += `3. Total Persons: (Adults: ${data.adultCount}, Children: ${data.childCount}, Infants: ${data.infantCount})\n`;
+            body += `4. Room Type: ${data.roomType}\n`;
+            body += `5. Package Days: ${data.packageDays}\n`;
+            body += `6. Expected Departure Date: ${data.departureDate}\n`;
+            body += `7. Airline Preference: ${data.airlinePreference}\n`;
+            body += `8. Departure City: ${data.departureCity}\n`;
+            body += `9. Arrival City: ${data.arrivalCity}\n`;
+            body += `========================================================\n\n`;
+
+            body += `[ Makkah Hotel Options ]\n`;
+            if (data.makkahHotels.length === 0) {
+                body += `  No Makkah hotel details provided.\n`;
+            } else {
+                data.makkahHotels.forEach((h, i) => {
+                    body += `  Option ${i + 1}: ${h.name} | ${h.distance} | ${h.star} | ${h.nights} nights\n`;
+                });
+            }
+
+            body += `\n[ Madina Hotel Options ]\n`;
+            if (data.madinaHotels.length === 0) {
+                body += `  No Madina hotel details provided.\n`;
+            } else {
+                data.madinaHotels.forEach((h, i) => {
+                    body += `  Option ${i + 1}: ${h.name} | ${h.distance} | ${h.star} | ${h.nights} nights\n`;
+                });
+            }
+
+            body += `\n[ Transportation Queries ]\n`;
+            if (data.transportationQueries.length === 0) {
+                body += `  No transportation queries provided.\n`;
+            } else {
+                data.transportationQueries.forEach((t, i) => {
+                    body += `  Query ${i + 1}: Type: ${t.type}, Details: ${t.details}\n`;
+                });
+            }
+
+            body += `\n========================================================\n`;
+            body += `Please prioritize this request. Jazakum Allahu Khairan.`;
+
+            return body;
+        }
+
+
+        // --- Automatic Nights Calculation Functions ---
+
+        function calculateTotalNights() {
+            const packageDays = parseInt(document.getElementById('packageDays').value) || 0;
+            const totalNights = packageDays > 0 ? packageDays - 1 : 0;
+            
+            const displayElement = document.getElementById('totalNightsDisplay');
+            const valueElement = document.getElementById('totalNightsValue');
+            
+            if (totalNights > 0) {
+                valueElement.textContent = totalNights;
+                displayElement.style.display = 'block';
+                
+                // Trigger Madina calculation if Makkah nights are already filled
+                const makkahNightsInputs = document.querySelectorAll('.makkah-hotel-nights');
+                if (makkahNightsInputs.length > 0 && makkahNightsInputs[0].value) {
+                    calculateMadinaAuto(makkahNightsInputs[0]);
+                }
+            } else {
+                displayElement.style.display = 'none';
+            }
+        }
+
+        function calculateMadinaAuto(makkahNightsInput) {
+            // Get total package nights
+            const packageDays = parseInt(document.getElementById('packageDays').value) || 0;
+            const totalNights = packageDays > 0 ? packageDays - 1 : 0;
+            
+            if (totalNights === 0) {
+                alert('⚠️ Please enter Package Days first!');
+                return;
+            }
+            
+            // Get Makkah nights value
+            const makkahNights = parseInt(makkahNightsInput.value) || 0;
+            
+            if (makkahNights > totalNights) {
+                alert(`⚠️ Makkah nights (${makkahNights}) cannot exceed total nights (${totalNights})!`);
+                makkahNightsInput.value = '';
+                return;
+            }
+            
+            // Calculate Madina nights
+            const madinaNights = totalNights - makkahNights;
+            
+            // Find the corresponding Madina entry (same index as Makkah)
+            const makkahEntry = makkahNightsInput.closest('.makkah-hotel-entry');
+            const makkahIndex = Array.from(document.querySelectorAll('.makkah-hotel-entry')).indexOf(makkahEntry);
+            
+            const madinaEntries = document.querySelectorAll('.madina-hotel-entry');
+            if (madinaEntries[makkahIndex]) {
+                const madinaNightsInput = madinaEntries[makkahIndex].querySelector('.madina-hotel-nights');
+                if (madinaNightsInput) {
+                    madinaNightsInput.value = madinaNights;
+                    
+                    // Visual feedback with flash animation
+                    madinaNightsInput.style.backgroundColor = '#86efac';
+                    setTimeout(() => {
+                        madinaNightsInput.style.backgroundColor = '#f0fdf4';
+                    }, 500);
+                    
+                    console.log(`✅ Auto-calculated: Makkah ${makkahNights} nights → Madina ${madinaNights} nights (Total: ${totalNights})`);
+                }
+            }
+        }
+
+        function enableMadinaEdit(madinaNightsInput) {
+            madinaNightsInput.readOnly = false;
+            madinaNightsInput.focus();
+        }
+
+        window.onload = function () {
+            // Apply company configuration first
+            applyCompanyConfig();
+            
+            // Initialize EmailJS
+            initEmailJS();
+            
+            populateCountryCodes();
+            // Call the new function to populate airport lists
+            populateAirportDropdowns();
+            reIndexEntries('makkah');
+            reIndexEntries('madina');
+            reIndexEntries('transport');
+            
+            // Debug: Log initial field structure
+            console.log("═══════════════════════════════════════════════════════════");
+            console.log("    FORM INITIALIZATION - DEBUG INFO");
+            console.log("═══════════════════════════════════════════════════════════");
+            console.log("Makkah hotel entries found:", document.querySelectorAll('.makkah-hotel-entry').length);
+            console.log("Madina hotel entries found:", document.querySelectorAll('.madina-hotel-entry').length);
+            console.log("Transport entries found:", document.querySelectorAll('.transport-entry').length);
+            
+            // Check if fields have proper classes
+            const makkahEntry = document.querySelector('.makkah-hotel-entry');
+            if (makkahEntry) {
+                console.log("Makkah entry fields:", {
+                    name: !!makkahEntry.querySelector('.makkah-hotel-name'),
+                    distance: !!makkahEntry.querySelector('.makkah-hotel-distance'),
+                    star: !!makkahEntry.querySelector('.makkah-hotel-star'),
+                    nights: !!makkahEntry.querySelector('.makkah-hotel-nights')
+                });
+            } else {
+                console.log("⚠️ No Makkah entry found!");
+            }
+            
+            const madinaEntry = document.querySelector('.madina-hotel-entry');
+            if (madinaEntry) {
+                console.log("Madina entry fields:", {
+                    name: !!madinaEntry.querySelector('.madina-hotel-name'),
+                    distance: !!madinaEntry.querySelector('.madina-hotel-distance'),
+                    star: !!madinaEntry.querySelector('.madina-hotel-star'),
+                    nights: !!madinaEntry.querySelector('.madina-hotel-nights')
+                });
+            } else {
+                console.log("⚠️ No Madina entry found!");
+            }
+            console.log("═══════════════════════════════════════════════════════════\n");
+        };
+
+    </script>
+</body>
+
+</html>

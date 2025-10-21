@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umrah Package Inquiry</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        .email-container {
+            max-width: 700px;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin-bottom: 15px;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            background: white;
+        }
+        .header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .header p {
+            font-size: 14px;
+            opacity: 0.95;
+        }
+        .content {
+            padding: 30px;
+        }
+        .greeting {
+            font-size: 16px;
+            color: #059669;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .intro {
+            font-size: 15px;
+            color: #4b5563;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .section {
+            margin-bottom: 25px;
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #10b981;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #059669;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .data-row {
+            display: flex;
+            margin-bottom: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .data-row:last-child {
+            border-bottom: none;
+        }
+        .data-label {
+            font-weight: 600;
+            color: #4b5563;
+            min-width: 180px;
+            flex-shrink: 0;
+        }
+        .data-value {
+            color: #1f2937;
+            flex-grow: 1;
+        }
+        .hotel-list {
+            white-space: pre-line;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 6px;
+            color: #374151;
+            line-height: 1.8;
+            border: 1px solid #e5e7eb;
+        }
+        .footer {
+            background: #1f2937;
+            color: #ffffff;
+            padding: 25px;
+            text-align: center;
+        }
+        .footer p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .footer a {
+            color: #10b981;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, #10b981, #3b82f6, #8b5cf6);
+            margin: 25px 0;
+        }
+        .action-box {
+            background: #fef3c7;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #f59e0b;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                margin: 0;
+                border-radius: 0;
+            }
+            .content {
+                padding: 20px;
+            }
+            .data-row {
+                flex-direction: column;
+            }
+            .data-label {
+                min-width: auto;
+                margin-bottom: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <img src="{{company_logo}}" alt="Company Logo">
+            <h1>🕋 Umrah Package Inquiry</h1>
+            <p>{{company_name}}</p>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="greeting">
+                Assalamu Alaikum wa Rahmatullah wa Barakatuh
+            </div>
+            
+            <p class="intro">
+                A new Umrah Package Inquiry has been submitted on <strong>{{submission_date}}</strong>. Please review the details below and prioritize this request.
+            </p>
+
+            <div class="divider"></div>
+
+            <!-- Guest Information -->
+            <div class="section">
+                <div class="section-title">📋 Guest Information</div>
+                <div class="data-row">
+                    <div class="data-label">Guest Name:</div>
+                    <div class="data-value"><strong>{{guest_name}}</strong></div>
+                </div>
+                <div class="data-row">
+                    <div class="data-label">Care of Person:</div>
+                    <div class="data-value">{{care_of_name}}</div>
+                </div>
+                <div class="data-row">
+                    <div class="data-label">Contact Number:</div>
+                    <div class="data-value"><strong>{{contact_no}}</strong></div>
+                </div>
+            </div>
+
+            <!-- Travel Details -->
+            <div class="section">
+                <div class="section-title">✈️ Travel Details</div>
+                <div class="data-row">
+                    <div class="data-label">Total Persons:</div>
+                    <div class="data-value">
+                        Adults: <strong>{{adult_count}}</strong> | 
+                        Children: <strong>{{child_count}}</strong> | 
+                        Infants: <strong>{{infant_count}}</strong>
+                    </div>
+                </div>
+                <div class="data-row">
+                    <div class="data-label">Room Type:</div>
+                    <div class="data-value">{{room_type}}</div>
+                </div>
+                <div class="data-row">
+                    <div class="data-label">Package Duration:</div>
+                    <div class="data-value">{{package_days}} Days</div>
+                </div>
+                <div class="data-row">
+                    <div class="data-label">Expected Departure:</div>
+                    <div class="data-value"><strong>{{departure_date}}</strong></div>
+                </div>
+                <div class="data-row">
+                    <div class="data-label">Airline Preference:</div>
+                    <div class="data-value">{{airline_preference}}</div>
+                </div>
+                <div class="data-row">
+                    <div class="data-label">Departure Airport:</div>
+                    <div class="data-value">{{departure_city}}</div>
+                </div>
+                <div class="data-row">
+                    <div class="data-label">Arrival City:</div>
+                    <div class="data-value">{{arrival_city}}</div>
+                </div>
+            </div>
+
+            <!-- Makkah Hotels -->
+            <div class="section">
+                <div class="section-title">🕋 Makkah Hotel Preferences</div>
+                <div class="hotel-list">{{makkah_hotels}}</div>
+            </div>
+
+            <!-- Madina Hotels -->
+            <div class="section">
+                <div class="section-title">🕌 Madina Hotel Preferences</div>
+                <div class="hotel-list">{{madina_hotels}}</div>
+            </div>
+
+            <!-- Transportation -->
+            <div class="section">
+                <div class="section-title">🚗 Transportation Requirements</div>
+                <div class="hotel-list">{{transportation}}</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="action-box">
+                <strong>⚠️ Action Required:</strong> Please respond to this inquiry within 24 hours. Contact the guest at <strong>{{contact_no}}</strong> to discuss package options and pricing.
+            </div>
+
+            <p style="text-align: center; color: #6b7280; font-size: 14px; margin-top: 30px;">
+                Jazakum Allahu Khairan for your prompt attention to this matter.
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">{{company_name}}</p>
+            <p>Website: <a href="{{website}}" target="_blank">{{website}}</a></p>
+            <p>WhatsApp: <strong>{{from_whatsapp}}</strong></p>
+            <p style="margin-top: 15px; font-size: 12px; opacity: 0.8;">
+                This is an automated email from your Umrah inquiry form.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
